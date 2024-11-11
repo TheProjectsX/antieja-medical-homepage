@@ -11,6 +11,7 @@ import { PiMicroscopeLight } from "react-icons/pi";
 import { GiTestTubes } from "react-icons/gi";
 import { RiCustomerService2Line } from "react-icons/ri";
 import { AiOutlineLike } from "react-icons/ai";
+import { TfiEmail } from "react-icons/tfi";
 
 const Home = () => {
     return (
@@ -141,6 +142,78 @@ const Home = () => {
                 <div className="flex flex-col gap-2 items-center text-center group cursor-pointer">
                     <AiOutlineLike className="text-6xl text-gray-400 group-hover:text-primary" />
                     <p>Professional team</p>
+                </div>
+            </section>
+
+            {/* Contact Section */}
+            <section className="rounded-xl overflow-hidden flex flex-col md:flex-row">
+                <div className="p-8 bg-[#e7e7e7]">
+                    <h4 className="font-semibold mb-1">Get the news first</h4>
+                    <p className="text-sm text-gray-700 mb-4">
+                        How often is preventive health check-up necessary? When
+                        is the time to get a flu shot? Subscribe to the
+                        newsletter so that the most important reminders arrive
+                        in your mailbox on time. You will receive not only
+                        useful information on how to take care of your health,
+                        but also the best offers and promotions.
+                    </p>
+                    <form onSubmit={(e) => e.preventDefault()}>
+                        <fieldset className="flex items-center mb-4">
+                            <input
+                                type="text"
+                                placeholder="Enter your email"
+                                className="border-none outline-none px-4 py-2 text-sm rounded-l-xl"
+                            />
+                            <button className="text-2xl px-4 py-1.5 rounded-r-xl bg-primary text-white">
+                                <TfiEmail />
+                            </button>
+                        </fieldset>
+
+                        <label className="flex items-center gap-1.5">
+                            <input type="checkbox" /> I agree to{" "}
+                            <Link
+                                to={"#"}
+                                className="text-primary underline underline-offset-2 decoration-primary"
+                            >
+                                the privacy policy*
+                            </Link>
+                        </label>
+                        <label>
+                            <input type="checkbox" /> I certify that I am 14
+                            years of age or older
+                            <span className="text-primary">*</span>
+                        </label>
+                    </form>
+                </div>
+                <div className="p-8 bg-[#ececec]">
+                    <h4 className="font-semibold mb-1">Customer service</h4>
+                    <p className="text-primary">
+                        Tel: <span className="font-semibold">8 700 55 511</span>
+                    </p>
+                    <p className="text-primary mb-4">
+                        Tel: (from abroad){" "}
+                        <span className="font-semibold">00-370-37-245330</span>
+                    </p>
+
+                    <p className="text-gray-700 mb-3">
+                        Calls to the customer service center number are charged
+                        according to the tariff applied by your communication
+                        operator.
+                    </p>
+
+                    <p className="text-primary mb-1.5">
+                        Email:{" "}
+                        <span className="font-medium">pagalba@anteja.lt</span>
+                    </p>
+
+                    <p className="mb-1.5">Working hours:</p>
+                    <p className="text-gray-700 mb-1.5">1. 7:00 - 19:00</p>
+                    <p className="text-gray-700 mb-1.5">2. 10:00 - 14:00</p>
+                </div>
+
+                <div className="p-8 bg-[#f3f3f3]">
+                    <h4 className="font-semibold mb-1">Reviews</h4>
+                    <div>Review Items will be here</div>
                 </div>
             </section>
         </main>
