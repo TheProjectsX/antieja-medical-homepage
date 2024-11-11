@@ -165,7 +165,7 @@ const Navbar = () => {
                         </p>
                     </div>
                     <div className="flex items-start gap-5">
-                        <div className="flex items-center gap-3">
+                        <div className="hidden lg:flex items-center gap-3">
                             <button className="text-4xl hover:text-primary">
                                 <CiHeart />
                             </button>
