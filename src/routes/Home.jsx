@@ -5,10 +5,16 @@ import Banner_02 from "../assets/banner-images/banner_02.jpg";
 import Banner_03 from "../assets/banner-images/banner_03.jpg";
 
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import { GiAtom } from "react-icons/gi";
+import { BiMessageSquareDetail } from "react-icons/bi";
+import { PiMicroscopeLight } from "react-icons/pi";
+import { GiTestTubes } from "react-icons/gi";
+import { RiCustomerService2Line } from "react-icons/ri";
+import { AiOutlineLike } from "react-icons/ai";
 
 const Home = () => {
     return (
-        <main className="max-width">
+        <main className="max-width space-y-10 mb-10">
             {/* Head section */}
             <section className="flex flex-col md:flex-row gap-3 md:gap-0 md:rounded-2xl overflow-hidden">
                 <Link
@@ -103,6 +109,39 @@ const Home = () => {
                         </div>
                     </div>
                 </Link>
+            </section>
+
+            {/* Info cards section */}
+            <section className="text-gray-600 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-y-6 gap-x-4">
+                <div className="flex flex-col gap-2 items-center text-center group cursor-pointer">
+                    <GiAtom className="text-6xl text-gray-400 group-hover:text-primary" />
+                    <p>Technological advantage</p>
+                </div>
+
+                <div className="flex flex-col gap-2 items-center text-center group cursor-pointer">
+                    <BiMessageSquareDetail className="text-6xl text-gray-400 group-hover:text-primary" />
+                    <p>Quality service</p>
+                </div>
+
+                <div className="flex flex-col gap-2 items-center text-center group cursor-pointer">
+                    <PiMicroscopeLight className="text-6xl text-gray-400 group-hover:text-primary" />
+                    <p>More than 3000 studies</p>
+                </div>
+
+                <div className="flex flex-col gap-2 items-center text-center group cursor-pointer">
+                    <GiTestTubes className="text-6xl text-gray-400 group-hover:text-primary" />
+                    <p>Fast research</p>
+                </div>
+
+                <div className="flex flex-col gap-2 items-center text-center group cursor-pointer">
+                    <RiCustomerService2Line className="text-6xl text-gray-400 group-hover:text-primary" />
+                    <p>Free remote discussion of results</p>
+                </div>
+
+                <div className="flex flex-col gap-2 items-center text-center group cursor-pointer">
+                    <AiOutlineLike className="text-6xl text-gray-400 group-hover:text-primary" />
+                    <p>Professional team</p>
+                </div>
             </section>
         </main>
     );
