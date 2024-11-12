@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
 
+// Banner Images
 import Banner_01 from "../assets/banner-images/banner_01.jpg";
 import Banner_02 from "../assets/banner-images/banner_02.jpg";
 import Banner_03 from "../assets/banner-images/banner_03.jpg";
+
+// Slider 01 Images
+import Slider_01 from "../assets/slider-images/slider_01.jpg";
+import Slider_02 from "../assets/slider-images/slider_02.jpg";
+import Slider_03 from "../assets/slider-images/slider_03.jpg";
+import Slider_04 from "../assets/slider-images/slider_04.jpg";
 
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { GiAtom } from "react-icons/gi";
@@ -13,7 +20,36 @@ import { RiCustomerService2Line } from "react-icons/ri";
 import { AiOutlineLike } from "react-icons/ai";
 import { TfiEmail } from "react-icons/tfi";
 
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+
+// Keen Slider
+import "keen-slider/keen-slider.min.css";
+import { useKeenSlider } from "keen-slider/react";
+import { useEffect, useState } from "react";
+// const animation = { duration: 50000, easing: (t) => t };
+
 const Home = () => {
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const [sliderLoaded, setSliderLoaded] = useState(false);
+    const [sliderRef, instanceRef] = useKeenSlider({
+        loop: true,
+        initial: 0,
+        slideChanged(slider) {
+            setCurrentSlide(slider.track.details.rel);
+        },
+        created() {
+            setSliderLoaded(true);
+        },
+    });
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            instanceRef.current?.next();
+        }, 3000);
+
+        return () => clearInterval(interval);
+    }, [sliderLoaded, instanceRef]);
+
     return (
         <main className="max-width space-y-10 mb-10">
             {/* Head section */}
@@ -110,6 +146,71 @@ const Home = () => {
                         </div>
                     </div>
                 </Link>
+            </section>
+
+            {/* Slider 01 */}
+            <section className="rounded-lg overflow-hidden cursor-pointer relative">
+                <div className="absolute bg-gray-600/40 px-2 py-1 rounded-full bottom-4 right-4 z-10 flex items-center gap-2">
+                    <div>
+                        {sliderLoaded && instanceRef.current && (
+                            <div className="flex gap-1.5 px-2">
+                                {[
+                                    ...Array(
+                                        instanceRef.current.track.details.slides
+                                            .length
+                                    ).keys(),
+                                ].map((idx) => {
+                                    return (
+                                        <button
+                                            key={idx}
+                                            onClick={() => {
+                                                instanceRef.current?.moveToIdx(
+                                                    idx
+                                                );
+                                            }}
+                                            className={
+                                                "slider-dot" +
+                                                (currentSlide === idx
+                                                    ? " slider-dot--active"
+                                                    : "")
+                                            }
+                                        ></button>
+                                    );
+                                })}
+                            </div>
+                        )}
+                    </div>
+                    <button
+                        onClick={(e) =>
+                            e.stopPropagation() || instanceRef.current?.prev()
+                        }
+                        className="bg-gray-200/70 text-white hover:bg-white hover:text-primary rounded-full p-2 text-3xl"
+                    >
+                        <MdKeyboardArrowLeft />
+                    </button>
+                    <button
+                        onClick={(e) =>
+                            e.stopPropagation() || instanceRef.current?.next()
+                        }
+                        className="bg-gray-200/70 text-white hover:bg-white hover:text-primary rounded-full p-2 text-3xl"
+                    >
+                        <MdKeyboardArrowRight />
+                    </button>
+                </div>
+                <div ref={sliderRef} className="keen-slider">
+                    <div className="keen-slider__slide">
+                        <img src={Slider_01} alt="Slider 01" />
+                    </div>
+                    <div className="keen-slider__slide">
+                        <img src={Slider_02} alt="Slider 02" />
+                    </div>
+                    <div className="keen-slider__slide">
+                        <img src={Slider_03} alt="Slider 03" />
+                    </div>
+                    <div className="keen-slider__slide">
+                        <img src={Slider_04} alt="Slider 04" />
+                    </div>
+                </div>
             </section>
 
             {/* Info cards section */}
