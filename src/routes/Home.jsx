@@ -5,11 +5,19 @@ import Banner_01 from "../assets/banner-images/banner_01.jpg";
 import Banner_02 from "../assets/banner-images/banner_02.jpg";
 import Banner_03 from "../assets/banner-images/banner_03.jpg";
 
+import Banner_04 from "../assets/banner-images/banner_04.jpg";
+
 // Slider 01 Images
 import Slider_01 from "../assets/slider-images/slider_01.jpg";
 import Slider_02 from "../assets/slider-images/slider_02.jpg";
 import Slider_03 from "../assets/slider-images/slider_03.jpg";
 import Slider_04 from "../assets/slider-images/slider_04.jpg";
+
+// Product Images
+import Product_01 from "../assets/product-images/product_01.png";
+import Product_02 from "../assets/product-images/product_02.png";
+import Product_03 from "../assets/product-images/product_03.png";
+import Product_04 from "../assets/product-images/product_04.png";
 
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { GiAtom } from "react-icons/gi";
@@ -19,36 +27,123 @@ import { GiTestTubes } from "react-icons/gi";
 import { RiCustomerService2Line } from "react-icons/ri";
 import { AiOutlineLike } from "react-icons/ai";
 import { TfiEmail } from "react-icons/tfi";
-
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+
+import CustomButton from "../components/CustomButton";
 
 // Keen Slider
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import { useEffect, useState } from "react";
-// const animation = { duration: 50000, easing: (t) => t };
+
+const productItems = [
+    {
+        image: Product_01,
+        title: "Immunity evaluation program",
+        studies: {
+            from: 4,
+            to: 7,
+        },
+        href: "#",
+    },
+    {
+        image: Product_02,
+        title: "A study of Men's health",
+        studies: {
+            from: 12,
+            to: 56,
+        },
+        href: "#",
+    },
+    {
+        image: Product_03,
+        title: "Examination of child's health",
+        studies: {
+            from: 9,
+            to: 31,
+        },
+        href: "#",
+    },
+    {
+        image: Product_04,
+        title: "A study of Women's health",
+        studies: {
+            from: 12,
+            to: 56,
+        },
+        href: "#",
+    },
+];
 
 const Home = () => {
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const [sliderLoaded, setSliderLoaded] = useState(false);
-    const [sliderRef, instanceRef] = useKeenSlider({
+    const [currentSlide_01, setCurrentSlide_01] = useState(0);
+    const [slider_01_Loaded, setSlider_01_Loaded] = useState(false);
+
+    const [slider_01_Ref, instance_01_Ref] = useKeenSlider({
+        slides: {
+            spacing: 8,
+        },
         loop: true,
         initial: 0,
         slideChanged(slider) {
-            setCurrentSlide(slider.track.details.rel);
+            setCurrentSlide_01(slider.track.details.rel);
         },
         created() {
-            setSliderLoaded(true);
+            setSlider_01_Loaded(true);
         },
     });
 
+    const [slider_02_PerView, setSlider_02_PerView] = useState(3);
+    const [currentSlide_02, setCurrentSlide_02] = useState(0);
+    const [slider_02_Loaded, setSlider_02_Loaded] = useState(false);
+
+    const [slider_02_Ref, instance_02_Ref] = useKeenSlider({
+        slides: { perView: slider_02_PerView },
+        loop: true,
+        initial: 0,
+        slideChanged(slider) {
+            setCurrentSlide_02(slider.track.details.rel);
+        },
+        created() {
+            setSlider_02_Loaded(true);
+        },
+    });
+
+    // Update perView based on viewport width
+    useEffect(() => {
+        const updatePerView = () => {
+            if (window.innerWidth < 640) {
+                setSlider_02_PerView(1); // Mobile view
+            } else if (window.innerWidth < 768) {
+                setSlider_02_PerView(2); // Tablet view
+            } else {
+                setSlider_02_PerView(3); // Desktop view
+            }
+        };
+
+        updatePerView();
+
+        window.addEventListener("resize", updatePerView);
+        return () => window.removeEventListener("resize", updatePerView);
+    }, []);
+
+    // Initialize the slider with responsive perView
+
     useEffect(() => {
         const interval = setInterval(() => {
-            instanceRef.current?.next();
+            instance_01_Ref.current?.next();
         }, 3000);
 
         return () => clearInterval(interval);
-    }, [sliderLoaded, instanceRef]);
+    }, [slider_01_Loaded, instance_01_Ref]);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            instance_02_Ref.current?.next();
+        }, 6000);
+
+        return () => clearInterval(interval);
+    }, [slider_02_Loaded, instance_02_Ref]);
 
     return (
         <main className="max-width space-y-10 mb-10">
@@ -152,25 +247,25 @@ const Home = () => {
             <section className="rounded-lg overflow-hidden cursor-pointer relative">
                 <div className="absolute bg-gray-600/40 px-2 py-1 rounded-full bottom-4 right-4 z-10 flex items-center gap-2">
                     <div>
-                        {sliderLoaded && instanceRef.current && (
+                        {slider_01_Loaded && instance_01_Ref.current && (
                             <div className="flex gap-1.5 px-2">
                                 {[
                                     ...Array(
-                                        instanceRef.current.track.details.slides
-                                            .length
+                                        instance_01_Ref.current.track.details
+                                            .slides.length
                                     ).keys(),
                                 ].map((idx) => {
                                     return (
                                         <button
                                             key={idx}
                                             onClick={() => {
-                                                instanceRef.current?.moveToIdx(
+                                                instance_01_Ref.current?.moveToIdx(
                                                     idx
                                                 );
                                             }}
                                             className={
                                                 "slider-dot" +
-                                                (currentSlide === idx
+                                                (currentSlide_01 === idx
                                                     ? " slider-dot--active"
                                                     : "")
                                             }
@@ -182,7 +277,8 @@ const Home = () => {
                     </div>
                     <button
                         onClick={(e) =>
-                            e.stopPropagation() || instanceRef.current?.prev()
+                            e.stopPropagation() ||
+                            instance_01_Ref.current?.prev()
                         }
                         className="bg-gray-200/70 text-white hover:bg-white hover:text-primary rounded-full p-2 text-3xl"
                     >
@@ -190,26 +286,108 @@ const Home = () => {
                     </button>
                     <button
                         onClick={(e) =>
-                            e.stopPropagation() || instanceRef.current?.next()
+                            e.stopPropagation() ||
+                            instance_01_Ref.current?.next()
                         }
                         className="bg-gray-200/70 text-white hover:bg-white hover:text-primary rounded-full p-2 text-3xl"
                     >
                         <MdKeyboardArrowRight />
                     </button>
                 </div>
-                <div ref={sliderRef} className="keen-slider">
+                <div ref={slider_01_Ref} className="keen-slider">
                     <div className="keen-slider__slide">
-                        <img src={Slider_01} alt="Slider 01" />
+                        <img
+                            src={Slider_01}
+                            alt="Slider 01"
+                            className="rounded-lg"
+                        />
                     </div>
                     <div className="keen-slider__slide">
-                        <img src={Slider_02} alt="Slider 02" />
+                        <img
+                            src={Slider_02}
+                            alt="Slider 02"
+                            className="rounded-lg"
+                        />
                     </div>
                     <div className="keen-slider__slide">
-                        <img src={Slider_03} alt="Slider 03" />
+                        <img
+                            src={Slider_03}
+                            alt="Slider 03"
+                            className="rounded-lg"
+                        />
                     </div>
                     <div className="keen-slider__slide">
-                        <img src={Slider_04} alt="Slider 04" />
+                        <img
+                            src={Slider_04}
+                            alt="Slider 04"
+                            className="rounded-lg"
+                        />
                     </div>
+                </div>
+            </section>
+
+            {/* Tryout Section (Banner 04) */}
+            <section className="w-full rounded-2xl overflow-hidden relative">
+                <img
+                    src={Banner_04}
+                    alt="Banner 04"
+                    className="w-full min-h-44"
+                />
+                <Link
+                    to="#"
+                    className="absolute bottom-3 sm:bottom-5 md:bottom-8 right-5"
+                >
+                    <CustomButton className="sm:py-2.5">
+                        Try it Out
+                    </CustomButton>
+                </Link>
+            </section>
+
+            {/* Slider 02 (Products) */}
+            <section className="rounded-lg overflow-hidden cursor-pointer relative">
+                <button
+                    onClick={(e) =>
+                        e.stopPropagation() || instance_02_Ref.current?.prev()
+                    }
+                    className="absolute top-[50%] left-0 hover:text-primary p-2 text-3xl z-10"
+                >
+                    <MdKeyboardArrowLeft />
+                </button>
+                <button
+                    onClick={(e) =>
+                        e.stopPropagation() || instance_02_Ref.current?.next()
+                    }
+                    className="absolute top-[50%] right-0 hover:text-primary p-2 text-3xl z-10"
+                >
+                    <MdKeyboardArrowRight />
+                </button>
+
+                <div ref={slider_02_Ref} className="keen-slider">
+                    {productItems.map((product, idx) => (
+                        <Link
+                            key={idx}
+                            to={product.href}
+                            className="keen-slider__slide flex flex-col items-center text-center group"
+                        >
+                            <div className="w-72 h-64 flex justify-center items-center mb-2">
+                                <img
+                                    src={product.image}
+                                    alt="Product 01"
+                                    className=""
+                                />
+                            </div>
+                            <h5 className="mb-3 font-medium text-lg group-hover:underline underline-offset-2">
+                                {product.title}
+                            </h5>
+                            <p className="mb-5 text-primary font-medium">
+                                From {product.studies?.from} to{" "}
+                                {product.studies?.to} Studies
+                            </p>
+                            <CustomButton className="py-2.5 px-12">
+                                More
+                            </CustomButton>
+                        </Link>
+                    ))}
                 </div>
             </section>
 
