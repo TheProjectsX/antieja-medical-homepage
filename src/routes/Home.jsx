@@ -19,6 +19,17 @@ import Product_02 from "../assets/product-images/product_02.png";
 import Product_03 from "../assets/product-images/product_03.png";
 import Product_04 from "../assets/product-images/product_04.png";
 
+// Icons
+import Blood_test_01 from "../assets/icons/blood_test_01.svg";
+import Blood_test_02 from "../assets/icons/blood_test_02.svg";
+import Blood_test_03 from "../assets/icons/blood_test_03.svg";
+import Blood_test_04 from "../assets/icons/blood_test_04.svg";
+
+import Services_01 from "../assets/icons/services_01.png";
+import Services_02 from "../assets/icons/services_02.png";
+import Services_03 from "../assets/icons/services_03.png";
+import Services_04 from "../assets/icons/services_04.png";
+
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { GiAtom } from "react-icons/gi";
 import { BiMessageSquareDetail } from "react-icons/bi";
@@ -146,7 +157,7 @@ const Home = () => {
     }, [slider_02_Loaded, instance_02_Ref]);
 
     return (
-        <main className="max-width space-y-10 mb-10">
+        <main className="max-width space-y-16 mb-10">
             {/* Head section */}
             <section className="flex flex-col md:flex-row gap-3 md:gap-0 md:rounded-2xl overflow-hidden">
                 <Link
@@ -389,6 +400,153 @@ const Home = () => {
                         </Link>
                     ))}
                 </div>
+            </section>
+
+            {/* Blood tests */}
+            <section className="flex flex-col gap-10 lg:flex-row">
+                <section className="flex-1 text-center text-gray-700">
+                    <h3 className="text-center lg:text-left text-2xl font-medium mb-6">
+                        Blood tests
+                    </h3>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-5">
+                        <Link
+                            to={"#"}
+                            className="flex flex-col items-center justify-center gap-3 bg-[#f3f3f3] px-4 rounded-lg group h-56"
+                        >
+                            <img
+                                src={Blood_test_01}
+                                alt="Blood test Image 01"
+                                className="group-hover:invert group-hover:brightness-0 transition-[filter] duration-100 ease-in-out"
+                            />
+                            <p className="font-medium">Anemia studies</p>
+                            <p className="flex items-center gap-0.5 text-primary">
+                                To order <MdKeyboardArrowRight />
+                            </p>
+                        </Link>
+                        <Link
+                            to={"#"}
+                            className="flex flex-col items-center justify-center gap-3 bg-[#f3f3f3] px-4 rounded-lg group h-56"
+                        >
+                            <img
+                                src={Blood_test_02}
+                                alt="Blood test Image 02"
+                                className="group-hover:invert group-hover:brightness-0 transition-[filter] duration-100 ease-in-out"
+                            />
+                            <p className="font-medium">
+                                General blood tests (cell tests)
+                            </p>
+                            <p className="flex items-center gap-0.5 text-primary">
+                                To order <MdKeyboardArrowRight />
+                            </p>
+                        </Link>
+                        <Link
+                            to={"#"}
+                            className="flex flex-col items-center justify-center gap-3 bg-[#f3f3f3] px-4 rounded-lg group h-56"
+                        >
+                            <img
+                                src={Blood_test_03}
+                                alt="Blood test Image 03"
+                                className="group-hover:invert group-hover:brightness-0 transition-[filter] duration-100 ease-in-out"
+                            />
+                            <p className="font-medium">
+                                Blood coagulation tests
+                            </p>
+                            <p className="flex items-center gap-0.5 text-primary">
+                                To order <MdKeyboardArrowRight />
+                            </p>
+                        </Link>
+                        <Link
+                            to={"#"}
+                            className="flex flex-col items-center justify-center gap-3 bg-[#f3f3f3] px-4 rounded-lg group h-56"
+                        >
+                            <img
+                                src={Blood_test_04}
+                                alt="Blood test Image 04"
+                                className="group-hover:invert group-hover:brightness-0 transition-[filter] duration-100 ease-in-out"
+                            />
+                            <p className="font-medium">
+                                Food sensitivity testing
+                            </p>
+                            <p className="flex items-center gap-0.5 text-primary">
+                                To order <MdKeyboardArrowRight />
+                            </p>
+                        </Link>
+                    </div>
+
+                    <div className="flex justify-center lg:justify-start">
+                        <Link to={"#"}>
+                            <CustomButton className="py-2.5 px-10">
+                                All research
+                            </CustomButton>
+                        </Link>
+                    </div>
+                </section>
+
+                <section className="flex-1 text-center text-gray-700">
+                    <h3 className="text-center lg:text-left text-2xl font-medium mb-6">
+                        Services
+                    </h3>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-5">
+                        <Link
+                            to={"#"}
+                            className="flex flex-col items-center justify-center gap-3 bg-[#f3f3f3] px-4 rounded-lg group h-56"
+                        >
+                            <img
+                                src={Services_01}
+                                alt="Services icon 01"
+                                className="group-hover:invert group-hover:brightness-0 transition-[filter] duration-100 ease-in-out"
+                            />
+                            <p className="font-medium">Vaccines</p>
+                            <p></p>
+                        </Link>
+                        <Link
+                            to={"#"}
+                            className="flex flex-col items-center justify-center gap-3 bg-[#f3f3f3] px-4 rounded-lg group h-56"
+                        >
+                            <img
+                                src={Services_02}
+                                alt="Services icon 02"
+                                className="group-hover:invert group-hover:brightness-0 transition-[filter] duration-100 ease-in-out"
+                            />
+                            <p className="font-medium">Health checks</p>
+                            <p></p>
+                        </Link>
+                        <Link
+                            to={"#"}
+                            className="flex flex-col items-center justify-center gap-3 bg-[#f3f3f3] px-4 rounded-lg group h-56"
+                        >
+                            <img
+                                src={Services_03}
+                                alt="Services icon 03"
+                                className="group-hover:invert group-hover:brightness-0 transition-[filter] duration-100 ease-in-out"
+                            />
+                            <p className="font-medium">For companies</p>
+                            <p></p>
+                        </Link>
+                        <Link
+                            to={"#"}
+                            className="flex flex-col items-center justify-center gap-3 bg-[#f3f3f3] px-4 rounded-lg group h-56"
+                        >
+                            <img
+                                src={Services_04}
+                                alt="Services icon 04"
+                                className="group-hover:invert group-hover:brightness-0 transition-[filter] duration-100 ease-in-out"
+                            />
+                            <p className="font-medium">Clinics</p>
+                            <p></p>
+                        </Link>
+                    </div>
+
+                    <div className="flex justify-center lg:justify-start">
+                        <Link to={"#"}>
+                            <CustomButton className="py-2.5 px-10">
+                                All services
+                            </CustomButton>
+                        </Link>
+                    </div>
+                </section>
             </section>
 
             {/* Info cards section */}
