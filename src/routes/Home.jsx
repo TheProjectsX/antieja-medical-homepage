@@ -39,6 +39,7 @@ import { RiCustomerService2Line } from "react-icons/ri";
 import { AiOutlineLike } from "react-icons/ai";
 import { TfiEmail } from "react-icons/tfi";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import { IoIosStar } from "react-icons/io";
 
 import CustomButton from "../components/CustomButton";
 
@@ -117,6 +118,16 @@ const Home = () => {
         },
         created() {
             setSlider_02_Loaded(true);
+        },
+    });
+
+    const [reviewSliderLoaded, setReviewSliderLoaded] = useState(false);
+    const [reviewSliderRef, reviewInstanceRef] = useKeenSlider({
+        // slides: { perView: 1 },
+        loop: true,
+        initial: 0,
+        created() {
+            setReviewSliderLoaded(true);
         },
     });
 
@@ -584,7 +595,7 @@ const Home = () => {
 
             {/* Contact Section */}
             <section className="rounded-xl overflow-hidden flex flex-col md:flex-row">
-                <div className="p-8 bg-[#e7e7e7]">
+                <div className="p-8 bg-[#e7e7e7] md:w-[35%]">
                     <h4 className="font-semibold mb-1">Get the news first</h4>
                     <p className="text-sm text-gray-700 mb-4">
                         How often is preventive health check-up necessary? When
@@ -622,7 +633,7 @@ const Home = () => {
                         </label>
                     </form>
                 </div>
-                <div className="p-8 bg-[#ececec]">
+                <div className="p-8 bg-[#ececec] md:w-[30%]">
                     <h4 className="font-semibold mb-1">Customer service</h4>
                     <p className="text-primary">
                         Tel: <span className="font-semibold">8 700 55 511</span>
@@ -632,7 +643,7 @@ const Home = () => {
                         <span className="font-semibold">00-370-37-245330</span>
                     </p>
 
-                    <p className="text-gray-700 mb-3">
+                    <p className="text-gray-700 mb-3 text-sm">
                         Calls to the customer service center number are charged
                         according to the tariff applied by your communication
                         operator.
@@ -648,9 +659,84 @@ const Home = () => {
                     <p className="text-gray-700 mb-1.5">2. 10:00 - 14:00</p>
                 </div>
 
-                <div className="p-8 bg-[#f3f3f3]">
-                    <h4 className="font-semibold mb-1">Reviews</h4>
-                    <div>Review Items will be here</div>
+                <div className="p-8 bg-[#f3f3f3] md:w-[35%]">
+                    <h4 className="font-semibold mb-4">Reviews</h4>
+                    <div
+                        className="relative min-h-60 md:h-72 keen-slider"
+                        ref={reviewSliderRef}
+                    >
+                        <div className="absolute right-3 bottom-8 text-3xl z-10">
+                            <button
+                                onClick={(e) =>
+                                    e.stopPropagation() ||
+                                    reviewInstanceRef.current?.prev()
+                                }
+                                className="cursor-pointer hover:text-primary"
+                            >
+                                <MdKeyboardArrowLeft />
+                            </button>
+                            <button
+                                onClick={(e) =>
+                                    e.stopPropagation() ||
+                                    reviewInstanceRef.current?.next()
+                                }
+                                className="cursor-pointer hover:text-primary"
+                            >
+                                <MdKeyboardArrowRight />
+                            </button>
+                        </div>
+                        <div className="keen-slider__slide">
+                            <div className="flex text-primary gap-0.5 text-lg mb-5">
+                                <IoIosStar />
+                                <IoIosStar />
+                                <IoIosStar />
+                                <IoIosStar />
+                                <IoIosStar />
+                            </div>
+                            <p className="text-sm mb-3">
+                                Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. At suscipit iste iure ullam,
+                                porro aut inventore.
+                            </p>
+                            <h5 className="uppercase mb-5">Jhon Deo</h5>
+                        </div>
+                        <div className="keen-slider__slide">
+                            <div className="flex text-primary gap-0.5 text-lg mb-5">
+                                <IoIosStar />
+                                <IoIosStar />
+                                <IoIosStar />
+                                <IoIosStar />
+                                <IoIosStar />
+                            </div>
+                            <p className="text-sm mb-3">
+                                Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. At suscipit iste iure ullam,
+                                porro aut inventore.
+                            </p>
+                            <h5 className="uppercase mb-5">Jhon Deo</h5>
+                        </div>
+                        <div className="keen-slider__slide">
+                            <div className="flex text-primary gap-0.5 text-lg mb-5">
+                                <IoIosStar />
+                                <IoIosStar />
+                                <IoIosStar />
+                                <IoIosStar />
+                                <IoIosStar />
+                            </div>
+                            <p className="text-sm mb-3">
+                                Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. At suscipit iste iure ullam,
+                                porro aut inventore.
+                            </p>
+                            <h5 className="uppercase mb-5">Jhon Deo</h5>
+                        </div>
+                    </div>
+                    <Link
+                        to={"#"}
+                        className="flex items-center gap-1.5 text-primary text-sm hover:underline underline-offset-2"
+                    >
+                        All reviews <MdKeyboardArrowRight />
+                    </Link>
                 </div>
             </section>
         </main>
