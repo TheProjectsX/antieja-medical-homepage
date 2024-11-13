@@ -12,7 +12,7 @@ const NavDropdownLinks = ({ links }) => {
                 <MdKeyboardArrowDown className="text-xl group-hover:-rotate-180 transition-transform duration-500 ease-in-out" />
             </Link>
             {/* Hovers */}
-            <div className="hidden group-hover:block px-8 py-5 bg-[#f0f0f0] absolute left-2 right-2 top-[100%]">
+            <div className="hidden z-10 group-hover:block px-10 py-8 bg-[#f0f0f0] absolute left-2 right-2 top-[100%]">
                 {links.title && (
                     <h4 className="mb-2.5 uppercase text-lg font-semibold">
                         {links.title}

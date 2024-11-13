@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 
+// Background Image
+import DNA_Image from "../assets/dna.png";
+
 // Banner Images
 import Banner_01 from "../assets/banner-images/banner_01.jpg";
 import Banner_02 from "../assets/banner-images/banner_02.jpg";
@@ -18,6 +21,14 @@ import Product_01 from "../assets/product-images/product_01.png";
 import Product_02 from "../assets/product-images/product_02.png";
 import Product_03 from "../assets/product-images/product_03.png";
 import Product_04 from "../assets/product-images/product_04.png";
+
+// News Images
+import News_01 from "../assets/news-images/news_01.png";
+import News_02 from "../assets/news-images/news_02.jpg";
+import News_03 from "../assets/news-images/news_03.jpg";
+import News_04 from "../assets/news-images/news_04.jpeg";
+import News_05 from "../assets/news-images/news_05.jpg";
+import News_06 from "../assets/news-images/news_06.png";
 
 // Icons
 import Blood_test_01 from "../assets/icons/blood_test_01.svg";
@@ -48,7 +59,7 @@ import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import { useEffect, useState } from "react";
 
-const productItems = [
+const productItemsData = [
     {
         image: Product_01,
         title: "Immunity evaluation program",
@@ -87,7 +98,42 @@ const productItems = [
     },
 ];
 
+const newsItemsData = [
+    {
+        image: News_01,
+        title: `A new "Antėja" procedure room has been opened in Klaipėda!`,
+        href: "#",
+    },
+    {
+        image: News_02,
+        title: `New "Antėja" treatment room in Vilnius!`,
+        href: "#",
+    },
+    {
+        image: News_03,
+        title: `Proper and timely treatment of hemorrhoids is a successful path to a fulfilling life`,
+        href: "#",
+    },
+    {
+        image: News_04,
+        title: `We have opened a new generation laboratory: it will perform as many as 300,000 tests daily`,
+        href: "#",
+    },
+    {
+        image: News_05,
+        title: `The clinic in Marijampole has opened its doors!`,
+        href: "#",
+    },
+    {
+        image: News_06,
+        title: `The rehabilitation center in Klaipėda has opened its doors!`,
+        href: "#",
+    },
+];
+
 const Home = () => {
+    const [sliderPerView, setSliderPerView] = useState(1);
+
     const [currentSlide_01, setCurrentSlide_01] = useState(0);
     const [slider_01_Loaded, setSlider_01_Loaded] = useState(false);
 
@@ -105,41 +151,38 @@ const Home = () => {
         },
     });
 
-    const [slider_02_PerView, setSlider_02_PerView] = useState(3);
-    const [currentSlide_02, setCurrentSlide_02] = useState(0);
-    const [slider_02_Loaded, setSlider_02_Loaded] = useState(false);
+    const [productsSliderLoaded, setProductsSliderLoaded] = useState(false);
 
-    const [slider_02_Ref, instance_02_Ref] = useKeenSlider({
-        slides: { perView: slider_02_PerView },
+    const [productsSliderRef, productsSliderInstance] = useKeenSlider({
+        slides: { perView: sliderPerView },
         loop: true,
         initial: 0,
-        slideChanged(slider) {
-            setCurrentSlide_02(slider.track.details.rel);
-        },
         created() {
-            setSlider_02_Loaded(true);
+            setProductsSliderLoaded(true);
         },
     });
 
-    const [reviewSliderLoaded, setReviewSliderLoaded] = useState(false);
     const [reviewSliderRef, reviewInstanceRef] = useKeenSlider({
         // slides: { perView: 1 },
         loop: true,
         initial: 0,
-        created() {
-            setReviewSliderLoaded(true);
-        },
+    });
+
+    const [newsSliderRef, newsSliderInstance] = useKeenSlider({
+        slides: { perView: sliderPerView },
+        loop: true,
+        initial: 0,
     });
 
     // Update perView based on viewport width
     useEffect(() => {
         const updatePerView = () => {
             if (window.innerWidth < 640) {
-                setSlider_02_PerView(1); // Mobile view
+                setSliderPerView(1); // Mobile view
             } else if (window.innerWidth < 768) {
-                setSlider_02_PerView(2); // Tablet view
+                setSliderPerView(2); // Tablet view
             } else {
-                setSlider_02_PerView(3); // Desktop view
+                setSliderPerView(3); // Desktop view
             }
         };
 
@@ -161,14 +204,17 @@ const Home = () => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            instance_02_Ref.current?.next();
+            productsSliderInstance.current?.next();
         }, 6000);
 
         return () => clearInterval(interval);
-    }, [slider_02_Loaded, instance_02_Ref]);
+    }, [productsSliderLoaded, productsSliderInstance]);
 
     return (
-        <main className="max-width space-y-16 mb-10">
+        <main
+            className="max-width space-y-20 mb-10 py-10 bg-cover bg-no-repeat bg-top min-h-full"
+            style={{ backgroundImage: `url('${DNA_Image}')` }}
+        >
             {/* Head section */}
             <section className="flex flex-col md:flex-row gap-3 md:gap-0 md:rounded-2xl overflow-hidden">
                 <Link
@@ -267,8 +313,38 @@ const Home = () => {
 
             {/* Slider 01 */}
             <section className="rounded-lg overflow-hidden cursor-pointer relative">
-                <div className="absolute bg-gray-600/40 px-2 py-1 rounded-full bottom-4 right-4 z-10 flex items-center gap-2">
-                    <div>
+                <div ref={slider_01_Ref} className="keen-slider">
+                    <div className="keen-slider__slide">
+                        <img
+                            src={Slider_01}
+                            alt="Slider 01"
+                            className="rounded-lg w-full"
+                        />
+                    </div>
+                    <div className="keen-slider__slide">
+                        <img
+                            src={Slider_02}
+                            alt="Slider 02"
+                            className="rounded-lg w-full"
+                        />
+                    </div>
+                    <div className="keen-slider__slide">
+                        <img
+                            src={Slider_03}
+                            alt="Slider 03"
+                            className="rounded-lg w-full"
+                        />
+                    </div>
+                    <div className="keen-slider__slide">
+                        <img
+                            src={Slider_04}
+                            alt="Slider 04"
+                            className="rounded-lg w-full"
+                        />
+                    </div>
+                </div>
+                <div className="mt-5 sm:m-0 sm:absolute bg-gray-600/40 px-2 py-1 rounded-full bottom-4 right-4 z-10 flex items-center justify-center gap-2">
+                    <div className="order-2 sm:order-1">
                         {slider_01_Loaded && instance_01_Ref.current && (
                             <div className="flex gap-1.5 px-2">
                                 {[
@@ -302,7 +378,7 @@ const Home = () => {
                             e.stopPropagation() ||
                             instance_01_Ref.current?.prev()
                         }
-                        className="bg-gray-200/70 text-white hover:bg-white hover:text-primary rounded-full p-2 text-3xl"
+                        className="bg-gray-200/70 text-white hover:bg-white hover:text-primary rounded-full p-2 text-3xl order-1 sm:order-2"
                     >
                         <MdKeyboardArrowLeft />
                     </button>
@@ -311,40 +387,43 @@ const Home = () => {
                             e.stopPropagation() ||
                             instance_01_Ref.current?.next()
                         }
-                        className="bg-gray-200/70 text-white hover:bg-white hover:text-primary rounded-full p-2 text-3xl"
+                        className="bg-gray-200/70 text-white hover:bg-white hover:text-primary rounded-full p-2 text-3xl order-3"
                     >
                         <MdKeyboardArrowRight />
                     </button>
                 </div>
-                <div ref={slider_01_Ref} className="keen-slider">
-                    <div className="keen-slider__slide">
-                        <img
-                            src={Slider_01}
-                            alt="Slider 01"
-                            className="rounded-lg"
-                        />
-                    </div>
-                    <div className="keen-slider__slide">
-                        <img
-                            src={Slider_02}
-                            alt="Slider 02"
-                            className="rounded-lg"
-                        />
-                    </div>
-                    <div className="keen-slider__slide">
-                        <img
-                            src={Slider_03}
-                            alt="Slider 03"
-                            className="rounded-lg"
-                        />
-                    </div>
-                    <div className="keen-slider__slide">
-                        <img
-                            src={Slider_04}
-                            alt="Slider 04"
-                            className="rounded-lg"
-                        />
-                    </div>
+            </section>
+
+            {/* Info cards section */}
+            <section className="text-gray-600 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-y-6 gap-x-4 text-sm sm:text-base">
+                <div className="flex flex-col gap-2 items-center text-center group cursor-pointer">
+                    <GiAtom className="text-6xl text-gray-400 group-hover:text-primary" />
+                    <p>Technological advantage</p>
+                </div>
+
+                <div className="flex flex-col gap-2 items-center text-center group cursor-pointer">
+                    <BiMessageSquareDetail className="text-6xl text-gray-400 group-hover:text-primary" />
+                    <p>Quality service</p>
+                </div>
+
+                <div className="flex flex-col gap-2 items-center text-center group cursor-pointer">
+                    <PiMicroscopeLight className="text-6xl text-gray-400 group-hover:text-primary" />
+                    <p>More than 3000 studies</p>
+                </div>
+
+                <div className="flex flex-col gap-2 items-center text-center group cursor-pointer">
+                    <GiTestTubes className="text-6xl text-gray-400 group-hover:text-primary" />
+                    <p>Fast research</p>
+                </div>
+
+                <div className="flex flex-col gap-2 items-center text-center group cursor-pointer">
+                    <RiCustomerService2Line className="text-6xl text-gray-400 group-hover:text-primary" />
+                    <p>Free remote discussion of results</p>
+                </div>
+
+                <div className="flex flex-col gap-2 items-center text-center group cursor-pointer">
+                    <AiOutlineLike className="text-6xl text-gray-400 group-hover:text-primary" />
+                    <p>Professional team</p>
                 </div>
             </section>
 
@@ -366,10 +445,11 @@ const Home = () => {
             </section>
 
             {/* Slider 02 (Products) */}
-            <section className="rounded-lg overflow-hidden cursor-pointer relative">
+            <section className="rounded-lg overflow-hidden cursor-pointer relative px-5">
                 <button
                     onClick={(e) =>
-                        e.stopPropagation() || instance_02_Ref.current?.prev()
+                        e.stopPropagation() ||
+                        productsSliderInstance.current?.prev()
                     }
                     className="absolute top-[50%] left-0 hover:text-primary p-2 text-3xl z-10"
                 >
@@ -377,15 +457,16 @@ const Home = () => {
                 </button>
                 <button
                     onClick={(e) =>
-                        e.stopPropagation() || instance_02_Ref.current?.next()
+                        e.stopPropagation() ||
+                        productsSliderInstance.current?.next()
                     }
                     className="absolute top-[50%] right-0 hover:text-primary p-2 text-3xl z-10"
                 >
                     <MdKeyboardArrowRight />
                 </button>
 
-                <div ref={slider_02_Ref} className="keen-slider">
-                    {productItems.map((product, idx) => (
+                <div ref={productsSliderRef} className="keen-slider">
+                    {productItemsData.map((product, idx) => (
                         <Link
                             key={idx}
                             to={product.href}
@@ -413,7 +494,7 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Blood tests */}
+            {/* Blood tests and Services */}
             <section className="flex flex-col gap-10 lg:flex-row">
                 <section className="flex-1 text-center text-gray-700">
                     <h3 className="text-center lg:text-left text-2xl font-medium mb-6">
@@ -560,36 +641,54 @@ const Home = () => {
                 </section>
             </section>
 
-            {/* Info cards section */}
-            <section className="text-gray-600 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-y-6 gap-x-4">
-                <div className="flex flex-col gap-2 items-center text-center group cursor-pointer">
-                    <GiAtom className="text-6xl text-gray-400 group-hover:text-primary" />
-                    <p>Technological advantage</p>
-                </div>
+            {/* Slider 03 (News) */}
+            <section className="rounded-lg overflow-hidden cursor-pointer relative px-6">
+                <h3 className="text-center text-3xl font-medium mb-6">News</h3>
+                <button
+                    onClick={(e) =>
+                        e.stopPropagation() ||
+                        newsSliderInstance.current?.prev()
+                    }
+                    className="absolute top-[50%] left-0 hover:text-primary p-2 text-3xl z-10"
+                >
+                    <MdKeyboardArrowLeft />
+                </button>
+                <button
+                    onClick={(e) =>
+                        e.stopPropagation() ||
+                        newsSliderInstance.current?.next()
+                    }
+                    className="absolute top-[50%] right-0 hover:text-primary p-2 text-3xl z-10"
+                >
+                    <MdKeyboardArrowRight />
+                </button>
 
-                <div className="flex flex-col gap-2 items-center text-center group cursor-pointer">
-                    <BiMessageSquareDetail className="text-6xl text-gray-400 group-hover:text-primary" />
-                    <p>Quality service</p>
-                </div>
-
-                <div className="flex flex-col gap-2 items-center text-center group cursor-pointer">
-                    <PiMicroscopeLight className="text-6xl text-gray-400 group-hover:text-primary" />
-                    <p>More than 3000 studies</p>
-                </div>
-
-                <div className="flex flex-col gap-2 items-center text-center group cursor-pointer">
-                    <GiTestTubes className="text-6xl text-gray-400 group-hover:text-primary" />
-                    <p>Fast research</p>
-                </div>
-
-                <div className="flex flex-col gap-2 items-center text-center group cursor-pointer">
-                    <RiCustomerService2Line className="text-6xl text-gray-400 group-hover:text-primary" />
-                    <p>Free remote discussion of results</p>
-                </div>
-
-                <div className="flex flex-col gap-2 items-center text-center group cursor-pointer">
-                    <AiOutlineLike className="text-6xl text-gray-400 group-hover:text-primary" />
-                    <p>Professional team</p>
+                <div ref={newsSliderRef} className="keen-slider">
+                    {newsItemsData.map((item, idx) => (
+                        <div
+                            key={idx}
+                            className="keen-slider__slide flex justify-center"
+                        >
+                            <Link
+                                to={item.href}
+                                className="w-56 sm:w-64 flex flex-col group"
+                            >
+                                <div className="w-full h-52 flex justify-center items-center mb-5 ">
+                                    <img
+                                        src={item.image}
+                                        alt={item.title}
+                                        className="rounded-xl w-full"
+                                    />
+                                </div>
+                                <p className="overflow-hidden text-ellipsis line-clamp-2 mb-6 group-hover:underline underline-offset-2">
+                                    {item.title}
+                                </p>
+                                <p className="flex items-center gap-1.5 text-primary hover:underline underline-offset-2 text-sm">
+                                    Read more <MdKeyboardArrowRight />
+                                </p>
+                            </Link>
+                        </div>
+                    ))}
                 </div>
             </section>
 
@@ -605,7 +704,10 @@ const Home = () => {
                         useful information on how to take care of your health,
                         but also the best offers and promotions.
                     </p>
-                    <form onSubmit={(e) => e.preventDefault()}>
+                    <form
+                        onSubmit={(e) => e.preventDefault()}
+                        className="text-sm"
+                    >
                         <fieldset className="flex items-center mb-4">
                             <input
                                 type="text"
@@ -649,14 +751,20 @@ const Home = () => {
                         operator.
                     </p>
 
-                    <p className="text-primary mb-1.5">
+                    <p className="text-primary mb-1.5 text-sm sm:text-base">
                         Email:{" "}
                         <span className="font-medium">pagalba@anteja.lt</span>
                     </p>
 
-                    <p className="mb-1.5">Working hours:</p>
-                    <p className="text-gray-700 mb-1.5">1. 7:00 - 19:00</p>
-                    <p className="text-gray-700 mb-1.5">2. 10:00 - 14:00</p>
+                    <p className="mb-1.5 text-sm sm:text-base">
+                        Working hours:
+                    </p>
+                    <p className="text-gray-700 mb-1.5 text-sm sm:text-base">
+                        1. 7:00 - 19:00
+                    </p>
+                    <p className="text-gray-700 mb-1.5 text-sm sm:text-base">
+                        2. 10:00 - 14:00
+                    </p>
                 </div>
 
                 <div className="p-8 bg-[#f3f3f3] md:w-[35%]">

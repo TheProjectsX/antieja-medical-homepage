@@ -1,8 +1,6 @@
-import { Outlet } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import { useState } from "react";
-import Drawer from "./components/Drawer";
+import ReactDrawer from "react-modern-drawer";
+import "react-modern-drawer/dist/index.css";
+import { Link } from "react-router-dom";
 
 const navLinks = [
     {
@@ -140,21 +138,46 @@ const navLinks = [
     },
 ];
 
-const App = () => {
-    const [drawerOpened, setDrawerOpened] = useState(false);
-
+const Drawer = ({ drawerOpened, setDrawerOpened }) => {
     return (
-        <>
-            <Drawer
-                navLinks={navLinks}
-                drawerOpened={drawerOpened}
-                setDrawerOpened={setDrawerOpened}
-            />
-            <Navbar navLinks={navLinks} setDrawerOpened={setDrawerOpened} />
-            <Outlet />
-            <Footer />
-        </>
+        <ReactDrawer
+            open={drawerOpened}
+            onClose={() => setDrawerOpened((prev) => !prev)}
+            direction="left"
+            className="p-5 pr-0"
+        >
+            <div className="">
+                <h4 className="uppercase mb-3 font-medium">Menu</h4>
+                <ul className="flex flex-col gap-1.5">
+                    {navLinks.map((item, idx) => (
+                        <li key={idx} className="w-full relative group pr-5">
+                            <Link
+                                to={item.href}
+                                className="py-2 px-4 w-full inline-block hover:bg-gray-200 rounded-xl"
+                            >
+                                {item.label}
+                            </Link>
+
+                            <div className="hidden group-hover:block absolute top-[calc(100%+10px)] left-0 right-5 bg-gray-100 p-5 z-10">
+                                <ul className="flex flex-col gap-1.5">
+                                    {item.navLinks.map((navLink, idx2) => (
+                                        <li key={idx2}>
+                                            <Link
+                                                to={navLink.href}
+                                                className="inline-block px-2 py-2 hover:bg-white w-full text-sm rounded-lg"
+                                            >
+                                                {navLink.label}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </ReactDrawer>
     );
 };
 
-export default App;
+export default Drawer;

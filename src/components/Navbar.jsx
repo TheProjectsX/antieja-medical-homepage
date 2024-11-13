@@ -8,137 +8,13 @@ import { Link } from "react-router-dom";
 import CustomButton from "./CustomButton";
 import NavDropdownLinks from "./NavDropdownLinks";
 
-const Navbar = () => {
-    const navLinks = [
-        {
-            href: "/research",
-            label: "Research",
-            title: "Blood Tests",
-            navLinks: [
-                {
-                    href: "/covid-19-research",
-                    label: "Covid-19 Research",
-                },
-                {
-                    href: "/hormone-tests",
-                    label: "Hormone Tests",
-                },
-                {
-                    href: "/anemia-studies",
-                    label: "Anemia Studies",
-                },
-                {
-                    href: "/infection-studies",
-                    label: "Infection Studies",
-                },
-                {
-                    href: "/allergological-tests",
-                    label: "Allergological tests and allergen programs",
-                },
-                {
-                    href: "/immunological-studies",
-                    label: "Immunological Studies",
-                },
-            ],
-        },
-        {
-            href: "/vaccines",
-            label: "Vaccines",
-            navLinks: [
-                {
-                    href: "/covid-19-research",
-                    label: "Covid-19 Research",
-                },
-                {
-                    href: "/hormone-tests",
-                    label: "Hormone Tests",
-                },
-                {
-                    href: "/anemia-studies",
-                    label: "Anemia Studies",
-                },
-                {
-                    href: "/infection-studies",
-                    label: "Infection Studies",
-                },
-                {
-                    href: "/allergological-tests",
-                    label: "Allergological tests and allergen programs",
-                },
-                {
-                    href: "/immunological-studies",
-                    label: "Immunological Studies",
-                },
-            ],
-        },
-        {
-            href: "/doctors",
-            label: "Doctors",
-            navLinks: [
-                {
-                    href: "/covid-19-research",
-                    label: "Covid-19 Research",
-                },
-                {
-                    href: "/hormone-tests",
-                    label: "Hormone Tests",
-                },
-                {
-                    href: "/anemia-studies",
-                    label: "Anemia Studies",
-                },
-                {
-                    href: "/infection-studies",
-                    label: "Infection Studies",
-                },
-                {
-                    href: "/allergological-tests",
-                    label: "Allergological tests and allergen programs",
-                },
-                {
-                    href: "/immunological-studies",
-                    label: "Immunological Studies",
-                },
-            ],
-        },
-        {
-            href: "/services",
-            label: "Services",
-            navLinks: [
-                {
-                    href: "/covid-19-research",
-                    label: "Covid-19 Research",
-                },
-                {
-                    href: "/hormone-tests",
-                    label: "Hormone Tests",
-                },
-                {
-                    href: "/anemia-studies",
-                    label: "Anemia Studies",
-                },
-                {
-                    href: "/infection-studies",
-                    label: "Infection Studies",
-                },
-                {
-                    href: "/allergological-tests",
-                    label: "Allergological tests and allergen programs",
-                },
-                {
-                    href: "/immunological-studies",
-                    label: "Immunological Studies",
-                },
-            ],
-        },
-    ];
-
+const Navbar = ({ navLinks, setDrawerOpened }) => {
     return (
         <header className="border-b border-gray-400">
             <div className="max-width relative pt-5 pb-3 lg:pb-0">
                 {/* Top of Header */}
-                <div className="flex justify-between items-start mb-5">
-                    <div className="flex items-center gap-4">
+                <div className="flex gap-5 justify-between items-start mb-5">
+                    <div className="flex items-center gap-4 text-sm sm:text-base">
                         <form
                             onSubmit={(e) => e.preventDefault()}
                             className="px-3 py-1.5 rounded-xl border border-gray-400 text-sm gap-1 items-center hidden lg:flex"
@@ -177,7 +53,7 @@ const Navbar = () => {
                             </button>
                         </div>
 
-                        <div className="flex flex-col gap-2">
+                        <div className="hidden sm:flex flex-col gap-2">
                             <CustomButton>
                                 Online registration + research results
                             </CustomButton>
@@ -219,7 +95,7 @@ const Navbar = () => {
                         <CustomButton className="mb-1.5">Email Us</CustomButton>
                     </a>
 
-                    <div className="flex-grow hidden md:block lg:hidden">
+                    <div className="flex-grow hidden sm:block lg:hidden">
                         <form
                             onSubmit={(e) => e.preventDefault()}
                             className="px-3 py-1.5 rounded-xl border border-gray-400 text-sm gap-1 items-center flex"
@@ -250,7 +126,10 @@ const Navbar = () => {
                             <BsBag />
                         </button>
 
-                        <button className="text-4xl text-primary ml-2">
+                        <button
+                            className="text-4xl text-primary ml-2"
+                            onClick={() => setDrawerOpened((prev) => !prev)}
+                        >
                             <GiHamburgerMenu />
                         </button>
                     </div>
