@@ -1,8 +1,16 @@
-# React + Vite
+# Antieja Medical Webpage!
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A homepage for a Medical Website.
 
-Currently, two official plugins are available:
+This webpage is a Cloned version of another Website.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+#### Visit: [https://antieja-medical.vercel.app/](https://antieja-medical.vercel.app/)
+
+#### Original Website: [https://anteja.lt/](https://anteja.lt/)
+
+### To run locally as Development:
+
+```bash script
+npm i
+npm run dev
+```
