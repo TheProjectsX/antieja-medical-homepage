@@ -9,18 +9,25 @@ import App from "./App.jsx";
 import Home from "./routes/Home.jsx";
 
 // Router
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+    [
+        {
+            path: "/*",
+            element: <App />,
+            children: [
+                {
+                    path: "*",
+                    element: <Home />,
+                },
+            ],
+        },
+    ],
     {
-        path: "/",
-        element: <App />,
-        children: [
-            {
-                path: "/",
-                element: <Home />,
-            },
-        ],
-    },
-]);
+        future: {
+            v7_relativeSplatPath: true,
+        },
+    }
+);
 
 createRoot(document.getElementById("root")).render(
     <StrictMode>
